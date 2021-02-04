@@ -39,26 +39,28 @@ public class Connection {
 		}
 	}
 
-	public Message receive() { 
-		Message message = new Message(); 
-		byte[] recvbuf = new byte[SEGMENTSIZE]; 
-		
-		// TODO: COMPLETE 
-		// read a segment (128 bytes) from the input stream and decapsulate into message 
-		// Hint: create a new Message object and use the decapsulate method 
-		
-		try { int read = inStream.read(recvbuf,0,MessageConfig.SEGMENTSIZE); 
-			if (read != MessageConfig.SEGMENTSIZE) { 
-				throw new IOException("receive - missing data"); 
+	public Message receive() {
+		Message message = new Message();
+		byte[] recvbuf = new byte[SEGMENTSIZE];
+
+		// TODO: COMPLETE
+		// read a segment (128 bytes) from the input stream and decapsulate into message
+		// Hint: create a new Message object and use the decapsulate method
+
+		try {
+			int read = inStream.read(recvbuf, 0, MessageConfig.SEGMENTSIZE);
+			if (read != MessageConfig.SEGMENTSIZE) {
+				throw new IOException("receive - missing data");
 			}
-				catch (IOException e) { 
-				e.printStackTrace();  
-			message = new Message(); 
-			message.decapsulate(recvbuf); 
-		
-		return message; 
+		} catch (IOException e) {
+			e.printStackTrace();
+			message = new Message();
+			message.decapsulate(recvbuf);
+
+		}
+		return message;
+
 	}
-}
 
 	// close the connection by closing streams and the underlying socket
 	public void close() {
