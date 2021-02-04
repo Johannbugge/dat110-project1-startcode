@@ -5,8 +5,6 @@ import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
 
-import static no.hvl.dat110.messaging.MessageConfig.SEGMENTSIZE;
-
 public class Connection {
 
 	private DataOutputStream outStream; // for writing bytes to the underlying TCP connection
@@ -32,32 +30,32 @@ public class Connection {
 
 	public void send(Message message) {
 
+		// TODO
+		// encapsulate the data contained in the message and write to the output stream
+		// Hint: use the encapsulate method on the message
 		try {
 			outStream.write(message.encapsulate());
-		} catch (IOException e) {
-			e.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
 	}
 
 	public Message receive() {
-		Message message = new Message();
-		byte[] recvbuf = new byte[SEGMENTSIZE];
 
-		// TODO: COMPLETE
+		Message message = new Message();
+		byte[] recvbuf = new byte[MessageConfig.SEGMENTSIZE];
+
+		// TODO
 		// read a segment (128 bytes) from the input stream and decapsulate into message
 		// Hint: create a new Message object and use the decapsulate method
-
 		try {
-			int read = inStream.read(recvbuf, 0, MessageConfig.SEGMENTSIZE);
-			if (read != MessageConfig.SEGMENTSIZE) {
-				throw new IOException("receive - missing data");
-			}
-		} catch (IOException e) {
-			e.printStackTrace();
-			message = new Message();
+			inStream.read(recvbuf, 0, recvbuf.length);
 			message.decapsulate(recvbuf);
+		} catch (IOException ex) {
 
+			ex.printStackTrace();
 		}
+
 		return message;
 
 	}

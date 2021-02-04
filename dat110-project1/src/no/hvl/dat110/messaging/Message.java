@@ -1,11 +1,16 @@
 package no.hvl.dat110.messaging;
 
+import java.util.Arrays;
+
 public class Message {
 
 	private byte[] payload;
 
 	public Message(byte[] payload) {
-		this.payload = payload; // TODO: check for length within boundary
+		// TODO: check for length within boundary
+		if (payload.length <= MessageConfig.SEGMENTSIZE) {
+			this.payload = payload;
+		}
 	}
 
 	public Message() {
@@ -24,7 +29,6 @@ public class Message {
 		// encapulate/encode the payload of this message in the
 		// encoded byte array according to message format
 		int length = payload.length;
-
 		encoded = new byte[MessageConfig.SEGMENTSIZE];
 		encoded[0] = (byte) length;
 		for (int i = 0; i < length; i++) {
@@ -43,5 +47,6 @@ public class Message {
 		for (int i = 0; i < payload.length; i++) {
 			payload[i] = received[i + 1];
 		}
+
 	}
 }

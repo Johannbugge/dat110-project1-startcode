@@ -15,24 +15,19 @@ public class MessagingClient {
 	}
 
 	// connect to messaging server
-	@SuppressWarnings("resource")
 	public Connection connect() {
-
-		Socket clientSocket = new Socket();
+		Socket clientSocket;
 		Connection connection = null;
 
-		// TODO: COMPLETE
+		// TODO
 		// create TCP socket for client and connection
 		// create connection object
-
 		try {
 			clientSocket = new Socket(server, port);
-		} catch (IOException e) {
-			e.printStackTrace();
+			connection = new Connection(clientSocket);
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
-
-		connection = new Connection(clientSocket);
-
 		return connection;
 	}
 }

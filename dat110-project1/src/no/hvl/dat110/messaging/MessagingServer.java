@@ -26,20 +26,15 @@ public class MessagingServer {
 
 		Connection connection = null;
 
-		// TODO:COMPLETE
+		// TODO
 		// accept TCP connection on welcome socket and create messaging connection
-		Socket socket;
-
 		try {
-			socket = welcomeSocket.accept();
-			connection = new Connection(socket);
-			return connection;
-		} catch (IOException e) {
-			System.out.println("Connection error: " + e.getMessage());
-			e.printStackTrace();
-			return null;
-
+			connection = new Connection(welcomeSocket.accept());
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
+
+		return connection;
 
 	}
 
