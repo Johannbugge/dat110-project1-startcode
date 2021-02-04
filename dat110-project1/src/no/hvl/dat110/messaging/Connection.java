@@ -49,7 +49,7 @@ public class Connection {
 		
 		try { int read = inStream.read(recvbuf,0,MessageConfig.SEGMENTSIZE); 
 			if (read != MessageConfig.SEGMENTSIZE) { 
-				throw new IOException("receive - missing data"); 
+				throw new IOException("receive - missing data");
 			}
 				catch (IOException e) { 
 				e.printStackTrace();  
