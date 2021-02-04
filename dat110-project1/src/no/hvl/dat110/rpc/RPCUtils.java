@@ -5,11 +5,12 @@ import java.util.Arrays;
 
 public class RPCUtils {
 
-	// Utility methods for marshalling and marshalling of parameters and return values
+	// Utility methods for marshalling and marshalling of parameters and return
+	// values
 	// in RPC request and RPC responses
-	// data byte arrays and return byte arrays is according to the 
+	// data byte arrays and return byte arrays is according to the
 	// RPC message syntax [rpcid,parameter/return value]
-	
+
 	public static byte[] marshallString(byte rpcid, String str) {
 
 		byte[] encoded = new byte[str.getBytes().length + 1];
@@ -18,8 +19,8 @@ public class RPCUtils {
 		try {
 			encoded[0] = rpcid;
 			for (int i = 0; i < str.getBytes().length; i++) {
-				encoded[i+1] = str.getBytes()[i];
-			}	
+				encoded[i + 1] = str.getBytes()[i];
+			}
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -51,7 +52,7 @@ public class RPCUtils {
 			encoded[0] = rpcid;
 		} catch (Exception e) {
 			e.printStackTrace();
-		}	
+		}
 
 		return encoded;
 
@@ -92,7 +93,7 @@ public class RPCUtils {
 		encoded[0] = rpcid;
 		try {
 			for (int i = 0; i < bytes.length; i++) {
-				encoded[i+1] = bytes[i];
+				encoded[i + 1] = bytes[i];
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
